@@ -1611,7 +1611,7 @@
                     var avg=strainVals.reduce(function(a,b){return a+b;},0)/strainVals.length;
                     var mx=Math.max.apply(null,strainVals);
                     var mn=Math.min.apply(null,strainVals);
-                    var st=mx>=58?'alarm':mx>=50?'warning':'normal';
+                    var st='warning':'normal';
                     tanks.push({idx:t,avg:avg,max:mx,min:mn,status:st,vals:strainVals});
                 }
 
@@ -1912,7 +1912,7 @@
                 grid: {left: "10%", right: "5%", top: "8%", bottom: "12%"},
                 xAxis: {name: "罐体", nameLocation: "center", nameGap: 32, min: 0.5, max: 12.5, axisLine: {lineStyle: {color: "#00d4ff"}}, axisLabel: {color: "#7fdbff", formatter: function(v){return 'T'+String(Math.round(v)).padStart(2,'0');}}, splitLine: {lineStyle: {color: "rgba(0,212,255,0.15)"}}, splitNumber: 12},
                 yAxis: {name: "健康度%", nameLocation: "center", nameGap: 45, min: 90, max: 100, axisLine: {lineStyle: {color: "#00d4ff"}}, axisLabel: {color: "#7fdbff"}, splitLine: {lineStyle: {color: "rgba(0,212,255,0.2)"}}},
-                series: [{symbolSize: 8, data: allScatterInit.map(function(d){return d.value;}), type: "scatter", itemStyle: {color: function(p){var st=p.data.status;return st==='danger'?'#ff4444':st==='warning'?'#ffaa00':'#00d4ff';}, opacity: 0.85}}]
+                series: [{symbolSize: 8, data: allScatterInit.map(function(d){return d.value;}), type: "scatter", itemStyle: {color: function(p){var st=p.data.status;return st==='warning'?'#ffaa00':'#00d4ff';}, opacity: 0.85}}]
             });
 
         }
