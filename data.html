@@ -100,7 +100,7 @@ createParticles();
 var currentStrainTank=0,currentTiltTank=0,currentSettleTank=0;
 var tankNames=["1号储罐","2号储罐","3号储罐","4号储罐","5号储罐","6号储罐","7号储罐","8号储罐","9号储罐","10号储罐","11号储罐","12号储罐"];
 var sensorBaseData={strain:[],tilt:[],settle:[]};
-for(var i=0;i<24;i++){sensorBaseData.strain.push(20+Math.random()*10);sensorBaseData.tilt.push(0.02+Math.random()*0.03);sensorBaseData.settle.push(1+Math.random()*1.5);}
+for(var i=0;i<12;i++){sensorBaseData.strain.push(20+Math.random()*10);sensorBaseData.tilt.push(0.02+Math.random()*0.03);sensorBaseData.settle.push(1+Math.random()*1.5);}for(var i=0;i<12;i++){sensorBaseData.settle.push(1+Math.random()*1.5);}
 function genSensorData(type){
 var html="";
 var base=type==='应变'?sensorBaseData.strain:(type==='倾角'?sensorBaseData.tilt:sensorBaseData.settle);
