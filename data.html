@@ -104,7 +104,7 @@ for(var i=0;i<12;i++){sensorBaseData.strain.push(20+Math.random()*10);sensorBase
 function genSensorData(type){
 var html="";
 var base=type==='应变'?sensorBaseData.strain:(type==='倾角'?sensorBaseData.tilt:sensorBaseData.settle);
-for(var i=0;i<16;i++){
+for(var i=0;i<base.length;i++){
 var shouldChange=Math.random()<0.1;
 var val=base[i];
 if(shouldChange){
