@@ -69,15 +69,15 @@ body{font-family:'Microsoft YaHei',sans-serif;background:linear-gradient(135deg,
 <div class="main-content">
 <div class="chart-container">
 <div class="chart-title">📈 应变状态详情 <button onclick="switchStrain(-1)" style="background:rgba(0,40,80,.8);border:1px solid rgba(0,212,255,.4);color:#00d4ff;padding:2px 8px;border-radius:3px;cursor:pointer;margin-left:10px">◀</button><button onclick="switchStrain(1)" style="background:rgba(0,40,80,.8);border:1px solid rgba(0,212,255,.4);color:#00d4ff;padding:2px 8px;border-radius:3px;cursor:pointer">▶</button> <span id="strainTankName" style="color:#00d4ff;font-weight:bold">1号储罐</span></div>
-<div id="strainTrend" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:10px;height:400px;overflow:auto"></div>
+<div id="strainTrend" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:10px;height:400px;overflow:auto"></div>
 </div>
 <div class="chart-container">
 <div class="chart-title">📐 倾角状态详情 <button onclick="switchTilt(-1)" style="background:rgba(0,40,80,.8);border:1px solid rgba(0,212,255,.4);color:#00d4ff;padding:2px 8px;border-radius:3px;cursor:pointer;margin-left:10px">◀</button><button onclick="switchTilt(1)" style="background:rgba(0,40,80,.8);border:1px solid rgba(0,212,255,.4);color:#00d4ff;padding:2px 8px;border-radius:3px;cursor:pointer">▶</button> <span id="tiltTankName" style="color:#00d4ff;font-weight:bold">1号储罐</span></div>
-<div id="tiltTrend" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:10px;height:400px;overflow:auto"></div>
+<div id="tiltTrend" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:10px;height:400px;overflow:auto"></div>
 </div>
 <div class="chart-container">
 <div class="chart-title">📉 沉降状态详情 <button onclick="switchSettle(-1)" style="background:rgba(0,40,80,.8);border:1px solid rgba(0,212,255,.4);color:#00d4ff;padding:2px 8px;border-radius:3px;cursor:pointer;margin-left:10px">◀</button><button onclick="switchSettle(1)" style="background:rgba(0,40,80,.8);border:1px solid rgba(0,212,255,.4);color:#00d4ff;padding:2px 8px;border-radius:3px;cursor:pointer">▶</button> <span id="settleTankName" style="color:#00d4ff;font-weight:bold">1号储罐</span></div>
-<div id="settleTrend" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:10px;height:400px;overflow:auto"></div>
+<div id="settleTrend" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:10px;height:400px;overflow:auto"></div>
 </div>
 </div>
 <div class="footer-bar">
@@ -100,7 +100,7 @@ createParticles();
 var currentStrainTank=0,currentTiltTank=0,currentSettleTank=0;
 var tankNames=["1号储罐","2号储罐","3号储罐","4号储罐","5号储罐","6号储罐","7号储罐","8号储罐","9号储罐","10号储罐","11号储罐","12号储罐"];
 var sensorBaseData={strain:[],tilt:[],settle:[]};
-for(var i=0;i<16;i++){sensorBaseData.strain.push(20+Math.random()*10);sensorBaseData.tilt.push(0.02+Math.random()*0.03);sensorBaseData.settle.push(1+Math.random()*1.5);}
+for(var i=0;i<12;i++){sensorBaseData.strain.push(20+Math.random()*10);sensorBaseData.tilt.push(0.02+Math.random()*0.03);sensorBaseData.settle.push(1+Math.random()*1.5);}
 function genSensorData(type){
 var html="";
 var base=type==='应变'?sensorBaseData.strain:(type==='倾角'?sensorBaseData.tilt:sensorBaseData.settle);
@@ -116,9 +116,9 @@ html+='<div style="background:rgba(0,30,60,.6);border:1px solid rgba(0,212,255,.
 }
 return html;
 }
-function switchStrain(d){currentStrainTank=(currentStrainTank+d+12)%12;document.getElementById("strainTankName").textContent=tankNames[currentStrainTank];for(var i=0;i<16;i++){sensorBaseData.strain[i]=15+Math.random()*25;}document.getElementById("strainTrend").innerHTML=genSensorData("应变");}
-function switchTilt(d){currentTiltTank=(currentTiltTank+d+12)%12;document.getElementById("tiltTankName").textContent=tankNames[currentTiltTank];for(var i=0;i<16;i++){sensorBaseData.tilt[i]=Math.random()*0.1;}document.getElementById("tiltTrend").innerHTML=genSensorData("倾角");}
-function switchSettle(d){currentSettleTank=(currentSettleTank+d+12)%12;document.getElementById("settleTankName").textContent=tankNames[currentSettleTank];for(var i=0;i<16;i++){sensorBaseData.settle[i]=0.1+Math.random()*3;}document.getElementById("settleTrend").innerHTML=genSensorData("沉降");}
+function switchStrain(d){currentStrainTank=(currentStrainTank+d+12)%12;document.getElementById("strainTankName").textContent=tankNames[currentStrainTank];for(var i=0;i<12;i++){sensorBaseData.strain[i]=15+Math.random()*25;}document.getElementById("strainTrend").innerHTML=genSensorData("应变");}
+function switchTilt(d){currentTiltTank=(currentTiltTank+d+12)%12;document.getElementById("tiltTankName").textContent=tankNames[currentTiltTank];for(var i=0;i<12;i++){sensorBaseData.tilt[i]=Math.random()*0.1;}document.getElementById("tiltTrend").innerHTML=genSensorData("倾角");}
+function switchSettle(d){currentSettleTank=(currentSettleTank+d+12)%12;document.getElementById("settleTankName").textContent=tankNames[currentSettleTank];for(var i=0;i<24;i++){sensorBaseData.settle[i]=0.1+Math.random()*3;}document.getElementById("settleTrend").innerHTML=genSensorData("沉降");}
 function updateTime(){document.getElementById('currentTime').textContent=new Date().toLocaleString('zh-CN')}
 updateTime();
 setInterval(updateTime,1000);
