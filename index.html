@@ -1445,7 +1445,7 @@
     </style>
 </head>
 <body>
-<div class="page-nav" style="display:flex;align-items:center;gap:6px;padding:0 20px;background:linear-gradient(135deg,#0a1428,#0d1f44);border-bottom:3px solid #00d4ff;position:sticky;top:0;z-index:1000;height:58px"><button class="page-btn active" style="position:relative;display:flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(0,140,220,.7);border:1px solid #00d4ff;border-radius:6px;color:#fff;font-size:13px;cursor:pointer"><span class="nav-icon">🏠</span>首页</button><button class="page-btn" onclick="location.href='trends.html'" style="position:relative;display:flex;align-items:center;gap:8px;padding:10px 18px;background:linear-gradient(180deg,rgba(0,100,180,.6),rgba(0,50,120,.7));border:1px solid rgba(0,180,255,.25);border-radius:6px;color:#fff;font-size:13px;cursor:pointer"><span class="nav-icon">📊</span>趋势监测</button><button class="page-btn" onclick="location.href='sensors.html'" style="position:relative;display:flex;align-items:center;gap:8px;padding:10px 18px;background:linear-gradient(180deg,rgba(0,100,180,.6),rgba(0,50,120,.7));border:1px solid rgba(0,180,255,.25);border-radius:6px;color:#fff;font-size:13px;cursor:pointer"><span class="nav-icon">📡</span>传感器运维</button><button class="page-btn" onclick="location.href='data.html'" style="position:relative;display:flex;align-items:center;gap:8px;padding:10px 18px;background:linear-gradient(180deg,rgba(0,100,180,.6),rgba(0,50,120,.7));border:1px solid rgba(0,180,255,.25);border-radius:6px;color:#fff;font-size:13px;cursor:pointer"><span class="nav-icon">📋</span>综合数据</button><button class="page-btn" onclick="location.href='history.html'" style="position:relative;display:flex;align-items:center;gap:8px;padding:10px 18px;background:linear-gradient(180deg,rgba(0,100,180,.6),rgba(0,50,120,.7));border:1px solid rgba(0,180,255,.25);border-radius:6px;color:#fff;font-size:13px;cursor:pointer"><span class="nav-icon">📜</span>历史数据</button></div>
+<div class="page-nav" style="display:flex;align-items:center;gap:6px;padding:0 20px;background:linear-gradient(135deg,#0a1428,#0d1f44);border-bottom:3px solid #00d4ff;position:sticky;top:0;z-index:1000;height:58px"><button class="page-btn active" style="position:relative;display:flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(0,140,220,.7);border:1px solid #00d4ff;border-radius:6px;color:#fff;font-size:13px;cursor:pointer"><span class="nav-icon">🏠</span>首页</button><button class="page-btn" onclick="location.href='trends.html'" style="position:relative;display:flex;align-items:center;gap:8px;padding:10px 18px;background:linear-gradient(180deg,rgba(0,100,180,.6),rgba(0,50,120,.7));border:1px solid rgba(0,180,255,.25);border-radius:6px;color:#fff;font-size:13px;cursor:pointer"><span class="nav-icon">📊</span>趋势监测</button><button class="page-btn" onclick="location.href='sensors.html'" style="position:relative;display:flex;align-items:center;gap:8px;padding:10px 18px;background:linear-gradient(180deg,rgba(0,100,180,.6),rgba(0,50,120,.7));border:1px solid rgba(0,180,255,.25);border-radius:6px;color:#fff;font-size:13px;cursor:pointer"><span class="nav-icon">📡</span>传感器运维</button><button class="page-btn" onclick="location.href='data.html'" style="position:relative;display:flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(0,60,120,.5);border:1px solid rgba(0,180,255,.25);border-radius:6px;color:#7ec8e8;font-size:13px;cursor:pointer"><span class="nav-icon">📋</span>综合数据</button></div>
 
     <div class="particles" id="particles"></div>
     <div class="header">
@@ -1534,18 +1534,21 @@
         }
         function updateTime(){document.getElementById('currentTime').textContent=new Date().toLocaleString('zh-CN')}
         function generateRandomChange(v,r,t){return Math.max(0,v+(Math.random()-.5+t*.1)*r)}
-        function updateData(){countdown=10;sensorData.forEach(s=>{if(s.type==='应变')s.value=generateRandomChange(s.value,5,-.2);else if(s.type==='位移')s.value=generateRandomChange(s.value,.5,.1);else if(s.type==='倾角')s.value=generateRandomChange(s.value,.008,0);else s.value=s.type==='温度'?Math.min(27,Math.max(23,generateRandomChange(s.value,0.3,0))):generateRandomChange(s.value,1,.2);s.status='warning':'normal';s.history.push(s.value);if(s.history.length>100)s.history.shift()});const sS=sensorData.filter(x=>x.type==='应变');document.getElementById('avgStrain').textContent=(sS.reduce((a,b)=>a+b.value,0)/sS.length).toFixed(1);const dS=sensorData.filter(x=>x.type==='位移');document.getElementById('maxDisplacement').textContent=Math.max(...dS.map(x=>x.value)).toFixed(1);document.getElementById('tiltAngle').textContent=Math.max(...sensorData.filter(x=>x.type==='倾角').map(x=>x.value)).toFixed(2);document.getElementById('avgTemp').textContent=(sensorData.filter(x=>x.type==='温度').reduce((a,b)=>a+b.value,0)/sensorData.filter(x=>x.type==='温度').length).toFixed(1);document.getElementById('settlementRate').textContent=generateRandomChange(.15,.05,.1).toFixed(2);updateAlertList(generateAlerts());updateSensorGrid();updateCharts()}
+        function updateData(){countdown=10;sensorData.forEach(s=>{if(s.type==='应变')s.value=generateRandomChange(s.value,5,-.2);else if(s.type==='位移')s.value=generateRandomChange(s.value,.5,.1);else if(s.type==='倾角')s.value=generateRandomChange(s.value,.008,0);else s.value=s.type==='温度'?Math.min(27,Math.max(23,generateRandomChange(s.value,0.3,0))):generateRandomChange(s.value,1,.2);s.status=s.value>58?'danger':s.value>50?'warning':'normal';s.history.push(s.value);if(s.history.length>100)s.history.shift()});const sS=sensorData.filter(x=>x.type==='应变');document.getElementById('avgStrain').textContent=(sS.reduce((a,b)=>a+b.value,0)/sS.length).toFixed(1);const dS=sensorData.filter(x=>x.type==='位移');document.getElementById('maxDisplacement').textContent=Math.max(...dS.map(x=>x.value)).toFixed(1);document.getElementById('tiltAngle').textContent=Math.max(...sensorData.filter(x=>x.type==='倾角').map(x=>x.value)).toFixed(2);document.getElementById('avgTemp').textContent=(sensorData.filter(x=>x.type==='温度').reduce((a,b)=>a+b.value,0)/sensorData.filter(x=>x.type==='温度').length).toFixed(1);document.getElementById('settlementRate').textContent=generateRandomChange(.15,.05,.1).toFixed(2);updateAlertList(generateAlerts());updateSensorGrid();updateCharts()}
         function generateAlerts(){
             var a=[];
-            // 只保留约5%预警
+            var dangerSensors=sensorData.filter(function(s){return s.status==='danger';});
             var warnSensors=sensorData.filter(function(s){return s.status==='warning';});
-            var idxs=[];while(idxs.length<3){var r=Math.floor(Math.random()*sensorData.length);if(!idxs.includes(r))idxs.push(r);}
-            idxs.forEach(function(i){
-                var s=sensorData[i];
-                var tankIdx=Math.floor(i/49);
+            // Only show max 1 danger + 2 warning from live sensors (vast majority are normal)
+            dangerSensors.slice(0,1).forEach(function(s){
+                var tankIdx=Math.floor(sensorData.indexOf(s)/49);
+                a.push({level:'danger',tank:'T'+String(tankIdx+1).padStart(2,'0'),id:s.id,type:s.type,val:s.value.toFixed(1),time:new Date().toLocaleTimeString()});
+            });
+            warnSensors.slice(0,2).forEach(function(s){
+                var tankIdx=Math.floor(sensorData.indexOf(s)/49);
                 a.push({level:'warning',tank:'T'+String(tankIdx+1).padStart(2,'0'),id:s.id,type:s.type,val:s.value.toFixed(1),time:new Date().toLocaleTimeString()});
             });
-            // 大部分是正常运行信息
+            // Most entries are normal running info
             var normalEntries=[
                 {tank:'T01',id:'S001',type:'应变',val:'28.3 με'},
                 {tank:'T02',id:'S050',type:'位移',val:'1.24 mm'},
@@ -2014,7 +2017,7 @@
                     sensors.push({
                         id: 'S' + String(dataIdx+1).padStart(3,'0'),
                         value: sv,
-                        status: sv > 80 ? 'alarm' : sv > 70 ? 'warning' : 'normal'
+                        status: sv > 58 ? 'alarm' : sv > 50 ? 'warning' : 'normal'
                     });
                 }
             }
@@ -2488,7 +2491,6 @@
             createParticles();
             initSensorData();
             initCharts();
-            renderTank(currentTank);
             updateData();
             setTimeout(updateCharts, 500);
             updateTime();
@@ -2504,7 +2506,7 @@
         },10000);
 </script>
 <div class="footer-bar" style="display:flex;justify-content:space-between;align-items:center;padding:10px 25px;background:rgba(0,15,30,.95);border-top:1px solid rgba(0,180,255,.25);font-size:13px;color:#4a9eff">
-<div style="color:#4a9eff"><span>👁 数据采集周期: 5s</span><span style="margin-left:20px">📡 传感器在线: 588/588</span></div>
+<div style="color:#4a9eff"><span>👁 数据采集周期: 5s</span><span style="margin-left:20px">📡 传感器在线: 48/48</span></div>
 <div style="color:#4a9eff">● RSBIM智能监测平台 v2.1 | 数据每10秒自动更新</div>
 </div>
 </body></html>
