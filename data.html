@@ -111,7 +111,7 @@ if(shouldChange){
 val=type==='应变'?(15+Math.random()*25):(type==='倾角'?Math.random()*0.1:0.1+Math.random()*3);
 base[i]=val;
 }
-var color=type==='应变'?(Math.random()<0.01?"#ffaa00":"#00ff88"):(type==='倾角'?(Math.random()<0.01?"#ffaa00":"#00ff88"):(Math.random()<0.01?"#ffaa00":"#00ff88"));
+var color=type==='应变'?(Math.random()<0.005?"#ffaa00":"#00ff88"):(type==='倾角'?(Math.random()<0.005?"#ffaa00":"#00ff88"):(Math.random()<0.005?"#ffaa00":"#00ff88"));
 html+='<div style="background:rgba(0,30,60,.6);border:1px solid rgba(0,212,255,.2);border-radius:6px;padding:10px;text-align:center"><div style="color:#00d4ff;font-size:11px">S'+(i+1)+'</div><div style="color:'+color+';font-size:16px;font-weight:bold">'+val.toFixed(2)+'</div><div style="color:#888;font-size:9px">'+(type==='应变'?'με':type==='倾角'?'°':'mm')+'</div></div>';
 }
 return html;
