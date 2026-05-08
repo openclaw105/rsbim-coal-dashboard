@@ -585,7 +585,7 @@
                     }(),
                     value: value,
                     unit: unit,
-                    status: 'warning'
+                    status: value > cfg.base + cfg.range ? 'danger' : value > cfg.base + cfg.range * 0.7 ? 'warning' : 'normal'
                 });
                 time += interval;
             }
@@ -668,8 +668,8 @@
             var showCount = Math.min(historyData.length, 100);
             for(var i=0;i<showCount;i++){
                 var d = historyData[i];
-                var statusColor = d.status === 'warning' ? '#ffaa00' : '#00ff88';
-                var statusText = d.status === 'warning' ? '预警' : '正常';
+                var statusColor = d.status === 'danger' ? '#ff4444' : d.status === 'warning' ? '#ffaa00' : '#00ff88';
+                var statusText = d.status === 'danger' ? '危险' : d.status === 'warning' ? '预警' : '正常';
                 html += '<tr>'
                     +'<td>'+d.time+'</td>'
                     +'<td>'+d.tank+'</td>'
@@ -691,7 +691,7 @@
             }
             var csv = '\uFEFF时间,储罐,传感器ID,监测值,单位,状态\n';
             historyData.forEach(function(d){
-                var statusText = d.status === 'warning' ? '预警' : '正常';
+                var statusText = d.status === 'danger' ? '危险' : d.status === 'warning' ? '预警' : '正常';
                 csv += d.time + ',' + d.tank + ',' + d.sensorId + ',' + d.value.toFixed(3) + ',' + d.unit + ',' + statusText + '\n';
             });
             var blob = new Blob([csv],{type:'text/csv;charset=utf-8'});
