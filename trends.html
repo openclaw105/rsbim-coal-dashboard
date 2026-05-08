@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>储罐安全监测系统 | RSBIM智能传感器</title>
-    <script src="echarts.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Microsoft YaHei',sans-serif;background:linear-gradient(135deg,#0a0e27,#0d1b2a 50%,#1a1f3a);min-height:100vh;color:#fff;overflow-x:hidden}
@@ -1426,7 +1426,7 @@
         <div class="stat-card" onclick="openModal('alerts')"><div class="label">告警数量</div><div class="value" id="alertCount">0</div><div class="unit">危险</div><div style="color:#ffaa00;font-size:9px">1预警</div></div>
     </div>
     <div class="main-content" style="display:flex;flex-direction:column;gap:15px;padding:15px 25px">
-        <div class="chart-container full-width"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><div class="chart-title" style="flex:1">📈 位移沉降趋势 <span id="currentTankName" style="color:#00d4ff;font-weight:bold">1号储罐</span> <span id="tankIndex" style="color:rgba(0,212,255,0.6);font-size:11px">(1/12)</span></div><div style="font-size:10px;color:rgba(0,212,255,0.7);flex:1;text-align:center" id="dispTankLabel">1号储罐</div><div style="flex:1;text-align:right"><button onclick="switchTank(-1)" style="background:rgba(0,40,80,0.8);border:1px solid rgba(0,212,255,0.4);color:#00d4ff;cursor:pointer;border-radius:3px;font-size:11px;padding:1px 6px">&#9664;</button> <button onclick="switchTank(1)" style="background:rgba(0,40,80,0.8);border:1px solid rgba(0,212,255,0.4);color:#00d4ff;cursor:pointer;border-radius:3px;font-size:11px;padding:1px 6px">&#9654;</button></div></div><div class="chart-box large" id="displacementTrend" style="height:420px;min-height:420px"></div></div></div><div id="sensorGrid" style="display:none"></div>
+        <div class="chart-container full-width"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><div class="chart-title" style="flex:1">📈 位移沉降趋势 <span id="currentTankName" style="color:#00d4ff;font-weight:bold">1号储罐</span> <span id="tankIndex" style="color:rgba(0,212,255,0.6);font-size:11px">(1/12)</span></div><div style="font-size:10px;color:rgba(0,212,255,0.7);flex:1;text-align:center" id="dispTankLabel">1号储罐</div><div style="flex:1;text-align:right"><button onclick="switchTank(-1)" style="background:rgba(0,40,80,0.8);border:1px solid rgba(0,212,255,0.4);color:#00d4ff;cursor:pointer;border-radius:3px;font-size:11px;padding:1px 6px">&#9664;</button> <button onclick="switchTank(1)" style="background:rgba(0,40,80,0.8);border:1px solid rgba(0,212,255,0.4);color:#00d4ff;cursor:pointer;border-radius:3px;font-size:11px;padding:1px 6px">&#9654;</button></div></div><div class="chart-box large" id="displacementTrend" style="height:420px;min-height:420px"></div></div></div>
         <div class="chart-container"><div class="chart-title">🌡️ 罐区温度场分布</div><div class="chart-box" id="tempField"></div></div></div>
         <div class="chart-container"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><div class="chart-title" style="flex:1">📐 储罐倾角监测 <span class="tank-label"></span></div><div style="font-size:10px;color:rgba(0,212,255,0.7);flex:1;text-align:center" id="tiltTankLabel">1号储罐</div><div style="flex:1;text-align:right"><button onclick="switchTank(-1)" style="background:rgba(0,40,80,0.8);border:1px solid rgba(0,212,255,0.4);color:#00d4ff;cursor:pointer;border-radius:3px;font-size:11px;padding:1px 6px">&#9664;</button> <button onclick="switchTank(1)" style="background:rgba(0,40,80,0.8);border:1px solid rgba(0,212,255,0.4);color:#00d4ff;cursor:pointer;border-radius:3px;font-size:11px;padding:1px 6px">&#9654;</button></div></div><div class="chart-box" id="tiltChart"></div></div></div>
         <div class="chart-container"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><div class="chart-title" style="flex:1">📉 应变时序预测 <span class="tank-label"></span></div><div style="font-size:10px;color:rgba(0,212,255,0.7);flex:1;text-align:center" id="strainTankLabel">1号储罐</div><div style="flex:1;text-align:right"><button onclick="switchTank(-1)" style="background:rgba(0,40,80,0.8);border:1px solid rgba(0,212,255,0.4);color:#00d4ff;cursor:pointer;border-radius:3px;font-size:11px;padding:1px 6px">&#9664;</button> <button onclick="switchTank(1)" style="background:rgba(0,40,80,0.8);border:1px solid rgba(0,212,255,0.4);color:#00d4ff;cursor:pointer;border-radius:3px;font-size:11px;padding:1px 6px">&#9654;</button></div></div><div class="chart-box" id="strainTime"></div></div></div>
@@ -1502,32 +1502,16 @@
         }
 
         function updateAlertList(a){
-            var alertEl=document.getElementById('alertList');if(!alertEl)return;var countEl=document.getElementById('alertCount');var dangerCount=a.filter(function(x){return x.level==='danger';}).length;var warnCount=a.filter(function(x){return x.level==='warning';}).length;countEl.textContent=(dangerCount+warnCount)>0?(dangerCount+'危险 '+warnCount+'预警'):'无告警';countEl.style.background=dangerCount>0?'rgba(255,40,40,0.4)':warnCount>0?'rgba(255,160,0,0.3)':'rgba(0,200,100,0.2)';countEl.style.color=dangerCount>0?'#ff8888':warnCount>0?'#ffcc44':'#88ffaa';alertEl.innerHTML=a.map(function(x){var sc=x.level==='danger'?'#ff6666':x.level==='warning'?'#ffcc44':'#66ffaa';var lv=x.level==='danger'?'危险':x.level==='warning'?'预警':'正常';return '<tr><td style="color:rgba(200,160,160,0.5);font-size:10px">'+x.time+'</td><td style="color:#ff9999;font-weight:bold">'+x.tank+'</td><td style="color:rgba(220,200,200,0.7)">'+x.id+' '+x.type+'</td><td style="color:'+sc+';font-weight:bold;text-align:right">'+x.val+'</td><td style="color:'+sc+'">'+lv+'</td></tr>';}).join('');
+            var alertEl=document.getElementById('alertList');var countEl=document.getElementById('alertCount');var dangerCount=a.filter(function(x){return x.level==='danger';}).length;var warnCount=a.filter(function(x){return x.level==='warning';}).length;countEl.textContent=(dangerCount+warnCount)>0?(dangerCount+'危险 '+warnCount+'预警'):'无告警';countEl.style.background=dangerCount>0?'rgba(255,40,40,0.4)':warnCount>0?'rgba(255,160,0,0.3)':'rgba(0,200,100,0.2)';countEl.style.color=dangerCount>0?'#ff8888':warnCount>0?'#ffcc44':'#88ffaa';alertEl.innerHTML=a.map(function(x){var sc=x.level==='danger'?'#ff6666':x.level==='warning'?'#ffcc44':'#66ffaa';var lv=x.level==='danger'?'危险':x.level==='warning'?'预警':'正常';return '<tr><td style="color:rgba(200,160,160,0.5);font-size:10px">'+x.time+'</td><td style="color:#ff9999;font-weight:bold">'+x.tank+'</td><td style="color:rgba(220,200,200,0.7)">'+x.id+' '+x.type+'</td><td style="color:'+sc+';font-weight:bold;text-align:right">'+x.val+'</td><td style="color:'+sc+'">'+lv+'</td></tr>';}).join('');
         }
 
         function updateSensorGrid(){
             var u={'应变':'με','位移':'mm','倾角':'°','温度':'°C'};
             var start=currentTank*49;
             var tankSensors=sensorData.slice(start,start+49);
-            var sg=document.getElementById('sensorGrid');if(!sg)return;sg.innerHTML=tankSensors.map(function(s){var sc=s.status==='alarm'?'#ff4444':s.status==='warning'?'#ffaa00':'#00ff88';return '<div style="background:rgba(0,20,40,0.85);border:1px solid rgba(0,212,255,0.22);border-radius:6px;padding:8px 4px;text-align:center;box-sizing:border-box;min-width:0"><div style="font-size:9px;color:rgba(0,212,255,0.7);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+s.id+'</div><div style="font-size:15px;font-weight:bold;color:#fff;margin-bottom:2px;white-space:nowrap">'+s.value.toFixed(1)+'</div><div style="font-size:9px;color:rgba(0,180,220,0.6);margin-bottom:2px">'+u[s.type]+'</div><div style="font-size:9px;color:'+sc+';font-weight:bold">'+(s.status==='danger'?'ALM':s.status==='warning'?'WRN':'OK')+'</div></div>';}).join('');
+            document.getElementById('sensorGrid').innerHTML=tankSensors.map(function(s){var sc=s.status==='alarm'?'#ff4444':s.status==='warning'?'#ffaa00':'#00ff88';return '<div style="background:rgba(0,20,40,0.85);border:1px solid rgba(0,212,255,0.22);border-radius:6px;padding:8px 4px;text-align:center;box-sizing:border-box;min-width:0"><div style="font-size:9px;color:rgba(0,212,255,0.7);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+s.id+'</div><div style="font-size:15px;font-weight:bold;color:#fff;margin-bottom:2px;white-space:nowrap">'+s.value.toFixed(1)+'</div><div style="font-size:9px;color:rgba(0,180,220,0.6);margin-bottom:2px">'+u[s.type]+'</div><div style="font-size:9px;color:'+sc+';font-weight:bold">'+(s.status==='danger'?'ALM':s.status==='warning'?'WRN':'OK')+'</div></div>';}).join('');
         }
         function updateCharts(){
-            // 先初始化ECharts图表（如果还没初始化）
-            if(!chartInstances.displacementTrend && document.getElementById("displacementTrend")){
-                chartInstances.displacementTrend = echarts.init(document.getElementById("displacementTrend"));
-                // 位移趋势图数据...
-                var days=["Day1","Day2","Day3","Day4","Day5","Day6","Day7"];
-                var ds=[];
-                var base=0.8;
-                for(var s=0;s<24;s++){
-                    var noise=Math.sin(s*1.7)*0.15;
-                    var dVals=days.map(function(_,i){return(base+noise+Math.sin(i*0.6+s*0.4)*0.3+Math.random()*0.2).toFixed(2);});
-                    ds.push({name:"J"+String(s+1).padStart(2,'0'),data:dVals,type:"line",smooth:true,lineStyle:{width:1.2,color:s%2===0?"rgba(0,212,255,0.25)":"rgba(0,255,136,0.25)"},itemStyle:{color:s%2===0?"rgba(0,212,255,0.25)":"rgba(0,255,136,0.25)"}});
-                }
-                ds.push({name:"趋势线",data:days.map(function(_,i){return(parseFloat(ds[0].data[i])+Math.sin(i*0.5)*0.4).toFixed(2);}),type:"line",smooth:true,lineStyle:{color:"#00ff88",width:2,type:"dashed"},itemStyle:{color:"#00ff88"}});
-                ds.push({name:"预测",data:[null,null,null,null,null,...days.slice(-2).map(function(_,i){return(parseFloat(ds[0].data[5+i])+0.25*(i+1)).toFixed(2);})],type:"line",smooth:true,lineStyle:{color:"#ffaa00",width:2,type:"dotted"},itemStyle:{color:"#ffaa00"}});
-                chartInstances.displacementTrend.setOption({tooltip:{trigger:"axis",backgroundColor:"rgba(4,10,26,0.95)",borderColor:"rgba(0,212,255,0.4)",textStyle:{color:"#7fdbff"}},series:ds});
-            }
             renderTank(currentTank);
             // 更新温度场
             if(chartInstances.tempField){
@@ -1840,9 +1824,7 @@
                     });
                 });
             })();
-// === 页面加载完成后初始化ECharts ===
-            function initEChartsCharts(){
-            // 位移趋势图: 当前储罐24个传感器
+// 位移趋势图: 当前储罐24个传感器
             chartInstances.displacementTrend = echarts.init(document.getElementById("displacementTrend"));
             (function(){
                 var days=["Day1","Day2","Day3","Day4","Day5","Day6","Day7"];
@@ -2383,7 +2365,6 @@
                 }]
             });
         }
-        } // initEChartsCharts 结束
 
         function closeModal(){document.getElementById('modal').classList.remove('active');document.getElementById('modalBody').innerHTML='';}
         function openModal(type){
@@ -2443,13 +2424,8 @@
             createParticles();
             initSensorData();
             initCharts();
-            // 延迟初始化ECharts图表
-            setTimeout(function(){
-                if(typeof initEChartsCharts==='function'){
-                    initEChartsCharts();
-                }
-            }, 100);
             updateData();
+            setTimeout(updateCharts, 500);
             updateTime();
         });
         setInterval(updateTime,1000);
