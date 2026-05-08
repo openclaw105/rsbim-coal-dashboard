@@ -552,23 +552,19 @@
                 } else if(dataType === 'settlement'){
                     // 沉降：几乎是一条直线，只有微小扰动（毫米级变化）
                     var settleBase = 0.152;
-                    // 极缓慢的漂移
-                    var settleDrift = Math.sin(time / 86400000 * Math.PI * 2) * 0.008;
-                    // 极微小的噪声
-                    var settleNoise = (Math.random() - 0.5) * 0.003;
-                    value = settleBase + settleDrift + settleNoise + sensorVariation * 0.05;
+                    // 极微小的噪声，改成不规律随机
+                    var settleNoise = (Math.random() - 0.5) * 0.002 + (Math.random() - 0.5) * 0.001;
+                    value = settleBase + settleNoise;
                     unit = 'mm';
-                    cfg = {base: 0.152, range: 0.02};
+                    cfg = {base: 0.152, range: 0.005};
                 } else if(dataType === 'tilt'){
                     // 倾角：几乎是一条直线，只有微小扰动（度级变化）
                     var tiltBase = 0.052;
-                    // 极缓慢的漂移
-                    var tiltDrift = Math.sin(time / 86400000 * Math.PI * 2) * 0.001;
-                    // 极微小的噪声
-                    var tiltNoise = (Math.random() - 0.5) * 0.0005;
-                    value = tiltBase + tiltDrift + tiltNoise + sensorVariation * 0.01;
+                    // 极微小的噪声，改成不规律随机
+                    var tiltNoise = (Math.random() - 0.5) * 0.0003 + (Math.random() - 0.5) * 0.0002;
+                    value = tiltBase + tiltNoise;
                     unit = '°';
-                    cfg = {base: 0.052, range: 0.003};
+                    cfg = {base: 0.052, range: 0.001};
                 } else {
                     // 默认处理
                     value = 0;
