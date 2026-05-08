@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+</head>
+<body>
+<div id="test" style="width:400px;height:300px;border:1px solid #ccc"></div>
+<script>
+setTimeout(function(){
+var chart = echarts.init(document.getElementById("test"));
+chart.setOption({
+    title: {text: 'Test Chart'},
+    xAxis: {data: ['A','B','C']},
+    yAxis: {},
+    series: [{type: 'line', data: [1,5,3]}]
+});
+console.log('ECharts inited');
+}, 500);
+</script>
+</body>
+</html>
