@@ -1466,7 +1466,7 @@
             // 只保留1%预警，不显示危险
             var warnSensors=sensorData.filter(function(s){return s.status==='warning';});
             // 随机选约1%的传感器显示预警（约6个）
-            var idxs=[];while(idxs.length<6){var r=Math.floor(Math.random()*sensorData.length);if(!idxs.includes(r))idxs.push(r);}
+            var idxs=[];while(idxs.length<3){var r=Math.floor(Math.random()*sensorData.length);if(!idxs.includes(r))idxs.push(r);}
             idxs.forEach(function(i){
                 var s=sensorData[i];
                 var tankIdx=Math.floor(i/49);
