@@ -1918,7 +1918,7 @@
                     sensors.push({
                         id: 'S' + String(dataIdx+1).padStart(3,'0'),
                         value: sv,
-                        status: sv > 58 ? 'alarm' : sv > 50 ? 'warning' : 'normal'
+                        status: sv > 85 ? 'danger' : sv > 70 ? 'warning' : 'normal'
                     });
                 }
             }
