@@ -1415,7 +1415,14 @@
             
         </div>
     </div>
-    <div class="stats-bar" style="position:fixed;top:58px;left:0;right:0;z-index:9998;background:rgba(10,20,40,0.96);box-shadow:0 4px 20px rgba(0,0,0,0.5)">
+    <div class="header" style="padding:12px 30px;border-bottom:2px solid #00d4ff;display:flex;justify-content:space-between;align-items:center">
+        <h1 style="color:#00d4ff;font-size:20px;text-shadow:0 0 10px rgba\(0,212,255,0.5\)">🏭 RSBIM储罐结构安全智能监测系统</h1>
+        <div style="display:flex;gap:20px;color:#7fdbff;font-size:12px">
+            <div><span class="status-dot online" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#00ff88;margin-right:5px"></span>系统在线</div>
+            <div id="currentTime">2026-01-01 00:00:00</div>
+        </div>
+    </div>
+    <div class="stats-bar">
         <div class="stat-card" onclick="openModal('sensors')"><div class="label">在线传感器</div><div class="value" id="sensorCount">48</div><div class="unit">个</div><div class="trend trend-stable">→ 正常</div></div>
         <div class="stat-card"><div class="label">监测储罐</div><div class="value">12</div><div class="unit">座</div></div>
         <div class="stat-card" onclick="openModal('strain')"><div class="label">平均应变</div><div class="value" id="avgStrain">34.8</div><div class="unit">με</div><div class="trend trend-down" id="strainTrend">↓ 1.2%</div></div>
