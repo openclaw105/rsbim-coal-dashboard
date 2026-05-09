@@ -1416,30 +1416,18 @@
         </div>
     </div>
     <div class="stats-bar">
-        <div class="stat-card" onclick="openModal('sensors')"><div class="label">在线传感器</div><div class="value">48</div><div class="unit">个</div><div class="trend trend-stable">→ 正常</div></div>
+        <div class="stat-card" onclick="openModal('sensors')"><div class="label">在线传感器</div><div class="value" id="sensorCount">48</div><div class="unit">个</div><div class="trend trend-stable">→ 正常</div></div>
         <div class="stat-card"><div class="label">监测储罐</div><div class="value">12</div><div class="unit">座</div></div>
-        <div class="stat-card"><div class="label">平均应变</div><div class="value">34.8</div><div class="unit">με</div></div>
-        <div class="stat-card"><div class="label">最大位移</div><div class="value">54.7</div><div class="unit">mm</div></div>
-        <div class="stat-card"><div class="label">沉降速率</div><div class="value">0.15</div><div class="unit">mm/d</div></div>
-        <div class="stat-card"><div class="label">倾角变化</div><div class="value">54.82</div><div class="unit">°</div></div>
-        <div class="stat-card"><div class="label">平均温度</div><div class="value">25.1</div><div class="unit">°C</div></div>
-        <div class="stat-card"><div class="label">告警数量</div><div class="value">0</div><div class="unit">正常</div></div>
+        <div class="stat-card" onclick="openModal('strain')"><div class="label">平均应变</div><div class="value" id="avgStrain">34.8</div><div class="unit">με</div><div class="trend trend-down" id="strainTrend">↓ 1.2%</div></div>
+        <div class="stat-card" onclick="openModal('displacement')"><div class="label">最大位移</div><div class="value" id="maxDisplacement">54.7</div><div class="unit">mm</div><div class="trend trend-stable" id="dispTrend">→ 稳定</div></div>
+        <div class="stat-card" onclick="openModal('settlement')"><div class="label">沉降速率</div><div class="value" id="settlementRate">0.15</div><div class="unit">mm/d</div><div class="trend trend-down">↓ 正常</div></div>
+        <div class="stat-card" onclick="openModal('tilt')"><div class="label">倾角变化</div><div class="value" id="tiltAngle">54.82</div><div class="unit">°</div><div class="trend trend-stable">→ 正常</div></div>
+        <div class="stat-card" onclick="openModal('temperature')"><div class="label">平均温度</div><div class="value" id="avgTemp">25.1</div><div class="unit">°C</div><div class="trend trend-up" id="tempTrend">↑ 0.3</div></div>
+        <div class="stat-card" onclick="openModal('alerts')"><div class="label">告警数量</div><div class="value" id="alertCount">0</div><div class="unit">危险</div><div style="color:#ffaa00;font-size:9px">1预警</div></div>
     </div>
     <div class="main-content" style="display:flex;flex-direction:column;gap:15px;padding:15px 25px">
-        <div class="chart-container full-width" style="min-height:300px">
-            <div class="chart-title">🎲 储罐传感器健康状态分布图</div>
-            <div class="chart-box" id="sensorScatter" style="height:250px;min-height:250px"></div>
-        </div>
-        <div class="chart-container full-width">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px">
-                <div class="chart-title">📡 实时传感器数据 <span style="font-size:10px;color:rgba(0,212,255,0.5)">(当前储罐49点)</span></div>
-                <div><span id="currentTankName" style="color:#00d4ff;font-weight:bold;margin-right:10px">1号储罐</span>
-                    <button onclick="currentTank=(currentTank-1+12)%12; updateCharts();" style="background:rgba(0,40,80,0.8);border:1px solid rgba(0,212,255,0.4);color:#00d4ff;cursor:pointer;border-radius:3px;font-size:11px;padding:2px 8px">◀</button>
-                    <button onclick="currentTank=(currentTank+1)%12; updateCharts();" style="background:rgba(0,40,80,0.8);border:1px solid rgba(0,212,255,0.4);color:#00d4ff;cursor:pointer;border-radius:3px;font-size:11px;padding:2px 8px">▶</button>
-                </div>
-            </div>
-            <div class="sensor-grid" id="sensorGrid" style="width:100%;box-sizing:border-box"></div>
-        </div>
+        <div class="chart-container full-width" style="min-height:280px"><div class="chart-title">🎲 传感器健康状态散点分布</div><div class="chart-box" id="sensorScatter" style="height:240px;min-height:240px"></div></div>
+        <div class="chart-container full-width"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><div class="chart-title">📡 实时传感器数据 <span style="font-size:10px;color:rgba(0,212,255,0.5)">(当前储罐49点)</span></div><div><span id="currentTankName" style="color:#00d4ff;font-weight:bold;margin-right:10px">1号储罐</span><button onclick="currentTank=(currentTank-1+12)%12; console.log('切换到罐:'+currentTank); document.getElementById('sensorGrid').innerHTML=''; for(var i=currentTank*49;i<currentTank*49+49;i++){sensorData[i]={id:'S'+(i+1),type:['应变','位移','倾角','温度'][i%4],value:10+Math.random()*40,status: sensorData[i]?sensorData[i].history:[],history:sensorData[i]?sensorData[i].history:[]};sensorData[i].status=sensorData[i].value>55?'danger':sensorData[i].value>45?'warning':'normal';} updateSensorGrid(); renderTank(currentTank);", style="background:rgba(0,40,80,0.8);border:1px solid rgba(0,212,255,0.4);color:#00d4ff;cursor:pointer;border-radius:3px;font-size:11px;padding:2px 8px">◀</button> <button onclick="currentTank=(currentTank+1)%12; console.log('切换到罐:'+currentTank); document.getElementById('sensorGrid').innerHTML=''; for(var i=currentTank*49;i<currentTank*49+49;i++){sensorData[i]={id:'S'+(i+1),type:['应变','位移','倾角','温度'][i%4],value:10+Math.random()*40,status: sensorData[i]?sensorData[i].history:[],history:sensorData[i]?sensorData[i].history:[]};sensorData[i].status=sensorData[i].value>55?'danger':sensorData[i].value>45?'warning':'normal';} updateSensorGrid(); renderTank(currentTank);", style="background:rgba(0,40,80,0.8);border:1px solid rgba(0,212,255,0.4);color:#00d4ff;cursor:pointer;border-radius:3px;font-size:11px;padding:2px 8px">▶</button></div></div><div class="sensor-grid" id="sensorGrid" style="width:100%;box-sizing:border-box"></div></div>
     </div>
 
     <div class="modal" id="modal"><div class="modal-content"><div class="modal-header" id="modalHeader"><h2 id="modalTitle"></h2></div><div class="modal-body" id="modalBody"></div></div></div>
@@ -1473,7 +1461,7 @@
         }
         function updateTime(){document.getElementById('currentTime').textContent=new Date().toLocaleString('zh-CN')}
         function generateRandomChange(v,r,t){return Math.max(0,v+(Math.random()-.5+t*.1)*r)}
-        function updateData(){countdown=10;sensorData.forEach(s=>{if(s.type==='应变')s.value=generateRandomChange(s.value,5,-.2);else if(s.type==='位移')s.value=generateRandomChange(s.value,.5,.1);else if(s.type==='倾角')s.value=generateRandomChange(s.value,.008,0);else s.value=s.type==='温度'?Math.min(27,Math.max(23,generateRandomChange(s.value,0.3,0))):generateRandomChange(s.value,1,.2);s.status=s.value>58?'danger':s.value>50?'warning':'normal';s.history.push(s.value);if(s.history.length>100)s.history.shift()});const sS=sensorData.filter(x=>x.type==='应变');document.getElementById('avgStrain').textContent=(sS.reduce((a,b)=>a+b.value,0)/sS.length).toFixed(1);const dS=sensorData.filter(x=>x.type==='位移');document.getElementById('maxDisplacement').textContent=Math.max(...dS.map(x=>x.value)).toFixed(1);document.getElementById('tiltAngle').textContent=Math.max(...sensorData.filter(x=>x.type==='倾角').map(x=>x.value)).toFixed(2);document.getElementById('avgTemp').textContent=(sensorData.filter(x=>x.type==='温度').reduce((a,b)=>a+b.value,0)/sensorData.filter(x=>x.type==='温度').length).toFixed(1);document.getElementById('settlementRate').textContent=generateRandomChange(.15,.05,.1).toFixed(2);updateAlertList(generateAlerts());// updateSensorGrid();updateCharts()}
+        function updateData(){countdown=10;sensorData.forEach(s=>{if(s.type==='应变')s.value=generateRandomChange(s.value,5,-.2);else if(s.type==='位移')s.value=generateRandomChange(s.value,.5,.1);else if(s.type==='倾角')s.value=generateRandomChange(s.value,.008,0);else s.value=s.type==='温度'?Math.min(27,Math.max(23,generateRandomChange(s.value,0.3,0))):generateRandomChange(s.value,1,.2);s.status=s.value>58?'danger':s.value>50?'warning':'normal';s.history.push(s.value);if(s.history.length>100)s.history.shift()});const sS=sensorData.filter(x=>x.type==='应变');document.getElementById('avgStrain').textContent=(sS.reduce((a,b)=>a+b.value,0)/sS.length).toFixed(1);const dS=sensorData.filter(x=>x.type==='位移');document.getElementById('maxDisplacement').textContent=Math.max(...dS.map(x=>x.value)).toFixed(1);document.getElementById('tiltAngle').textContent=Math.max(...sensorData.filter(x=>x.type==='倾角').map(x=>x.value)).toFixed(2);document.getElementById('avgTemp').textContent=(sensorData.filter(x=>x.type==='温度').reduce((a,b)=>a+b.value,0)/sensorData.filter(x=>x.type==='温度').length).toFixed(1);document.getElementById('settlementRate').textContent=generateRandomChange(.15,.05,.1).toFixed(2);updateAlertList(generateAlerts());updateSensorGrid();updateCharts()}
         function generateAlerts(){
             var a=[];
             var dangerSensors=sensorData.filter(function(s){return s.status==='danger';});
@@ -1921,7 +1909,7 @@
                     sensors.push({
                         id: 'S' + String(dataIdx+1).padStart(3,'0'),
                         value: sv,
-                        status: sv > 85 ? 'danger' : sv > 70 ? 'warning' : 'normal'
+                        status: sv > 58 ? 'alarm' : sv > 50 ? 'warning' : 'normal'
                     });
                 }
             }
@@ -2419,7 +2407,8 @@
         window.addEventListener('load', function() {
             createParticles();
             initSensorData();
-            //             initCharts();
+            updateSensorGrid();
+            initCharts();
             updateData();
             setTimeout(updateCharts, 500);
             updateTime();
