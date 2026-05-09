@@ -17,7 +17,7 @@
         @keyframes scan{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
         .header h1{font-size:24px;color:#00d4ff;text-shadow:0 0 20px #00d4ff;letter-spacing:3px}
         .header .meta{display:flex;gap:20px;align-items:center}
-        .header .time,.header .status{color:#7fdbff;font-size:13px;font-family:'Consolas',monospace}
+        .header .time,.header .status{color:#7fdbff;font-size:12px;font-family:'Consolas',monospace}
         
         .status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;animation:pulse 2s infinite}
         .status-dot.online{background:#00ff88;box-shadow:0 0 10px #00ff88}
@@ -33,14 +33,14 @@
         
         .setting-row{display:flex;justify-content:space-between;align-items:center;margin:14px 0;padding:10px 15px;background:rgba(0,30,60,.4);border-radius:8px;border:1px solid rgba(0,212,255,.15)}
         .setting-row:hover{border-color:rgba(0,212,255,.4)}
-        .setting-label{color:#7fdbff;font-size:13px}
+        .setting-label{color:#7fdbff;font-size:12px}
         .setting-value{color:#00d4ff;font-size:14px;font-family:'Consolas',monospace}
         
-        input[type="number"], input[type="text"], select{background:rgba(0,20,40,.8);border:1px solid rgba(0,212,255,.4);border-radius:5px;padding:8px 12px;color:#00d4ff;font-size:13px;width:140px;text-align:center}
+        input[type="number"], input[type="text"], select{background:rgba(0,20,40,.8);border:1px solid rgba(0,212,255,.4);border-radius:5px;padding:8px 12px;color:#00d4ff;font-size:12px;width:140px;text-align:center}
         input[type="number"]:focus, input[type="text"]:focus, select:focus{outline:none;border-color:#00ff88;box-shadow:0 0 10px rgba(0,255,136,.3)}
         select{width:160px;cursor:pointer}
         
-        .btn{background:linear-gradient(145deg,rgba(0,100,180,.7),rgba(0,50,120,.8));border:1px solid rgba(0,212,255,.4);border-radius:6px;padding:10px 20px;color:#fff;font-size:13px;cursor:pointer;transition:all .3s}
+        .btn{background:linear-gradient(145deg,rgba(0,100,180,.7),rgba(0,50,120,.8));border:1px solid rgba(0,212,255,.4);border-radius:6px;padding:10px 20px;color:#fff;font-size:12px;cursor:pointer;transition:all .3s}
         .btn:hover{background:linear-gradient(145deg,rgba(0,140,220,.8),rgba(0,80,160,.9));border-color:#00ff88;box-shadow:0 0 20px rgba(0,255,136,.4)}
         .btn-save{background:linear-gradient(145deg,rgba(0,180,100,.7),rgba(0,100,60,.8));border-color:#00ff88}
         .btn-save:hover{background:linear-gradient(145deg,rgba(0,220,120,.8),rgba(0,140,80,.9));box-shadow:0 0 25px rgba(0,255,136,.5)}
@@ -60,14 +60,14 @@
         .toggle-switch.active{background:rgba(0,255,136,.4)}
         .toggle-switch.active::before{left:27px;background:#00ff88}
         
-        .log-console{background:rgba(0,10,25,.8);border:1px solid rgba(0,212,255,.2);border-radius:8px;padding:15px;height:200px;overflow-y:auto;font-family:'Consolas',monospace;font-size:11px;color:#7fdbff}
+        .log-console{background:rgba(0,10,25,.8);border:1px solid rgba(0,212,255,.2);border-radius:8px;padding:15px;height:200px;overflow-y:auto;font-family:'Consolas',monospace;font-size:10px;color:#7fdbff}
         .log-entry{margin:4px 0;padding:4px 8px;border-left:3px solid #00d4ff}
         .log-entry.info{border-left-color:#00d4ff}
         .log-entry.success{border-left-color:#00ff88}
         .log-entry.warning{border-left-color:#ffaa00}
         
         .footer-bar{background:linear-gradient(90deg,rgba(0,30,60,.95),rgba(0,20,40,.98));padding:12px 25px;border-top:1px solid rgba(0,212,255,.2);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#5a9fc9}
-        .page-btn{position:relative;display:flex;align-items:center;gap:8px;padding:10px 18px;background:linear-gradient(180deg,rgba(0,100,180,.6),rgba(0,50,120,.7));border:1px solid rgba(0,180,255,.25);border-radius:6px;color:#fff;font-size:13px;cursor:pointer}
+        .page-btn{position:relative;display:flex;align-items:center;gap:8px;padding:6px 12px;background:linear-gradient(180deg,rgba(0,100,180,.6),rgba(0,50,120,.7));border:1px solid rgba(0,180,255,.25);border-radius:6px;color:#fff;font-size:12px;cursor:pointer}
         .page-btn.active{background:rgba(0,140,220,.7);border:1px solid #00d4ff}
         .page-btn:hover{background:rgba(0,140,220,.8)}
         .nav-icon{margin-right:4px}
@@ -78,7 +78,7 @@
     </style>
 </head>
 <body>
-<div class="page-nav" style="display:flex;align-items:center;gap:6px;padding:0 20px;background:linear-gradient(135deg,#0a1428,#0d1f44);border-bottom:3px solid #00d4ff;position:sticky;top:0;z-index:1000;height:58px"><button class="page-btn" onclick="location.href='index.html'" style="position:relative;display:flex;align-items:center;gap:8px;padding:10px 18px;background:linear-gradient(180deg,rgba(0,100,180,.6),rgba(0,50,120,.7));border:1px solid rgba(0,180,255,.25);border-radius:6px;color:#fff;font-size:13px;cursor:pointer"><span class="nav-icon">🏠</span>首页</button><button class="page-btn" onclick="location.href='data.html'" style="position:relative;display:flex;align-items:center;gap:8px;padding:10px 18px;background:linear-gradient(180deg,rgba(0,100,180,.6),rgba(0,50,120,.7));border:1px solid rgba(0,180,255,.25);border-radius:6px;color:#fff;font-size:13px;cursor:pointer"><span class="nav-icon">📋</span>综合数据</button><button class="page-btn" onclick="location.href='trends.html'" style="position:relative;display:flex;align-items:center;gap:8px;padding:10px 18px;background:linear-gradient(180deg,rgba(0,100,180,.6),rgba(0,50,120,.7));border:1px solid rgba(0,180,255,.25);border-radius:6px;color:#fff;font-size:13px;cursor:pointer"><span class="nav-icon">📊</span>趋势监测</button><button class="page-btn" onclick="location.href='history.html'" style="position:relative;display:flex;align-items:center;gap:8px;padding:10px 18px;background:linear-gradient(180deg,rgba(0,100,180,.6),rgba(0,50,120,.7));border:1px solid rgba(0,180,255,.25);border-radius:6px;color:#fff;font-size:13px;cursor:pointer"><span class="nav-icon">📜</span>历史数据</button><button class="page-btn" onclick="location.href='sensors.html'" style="position:relative;display:flex;align-items:center;gap:8px;padding:10px 18px;background:linear-gradient(180deg,rgba(0,100,180,.6),rgba(0,50,120,.7));border:1px solid rgba(0,180,255,.25);border-radius:6px;color:#fff;font-size:13px;cursor:pointer"><span class="nav-icon">📡</span>传感器运维</button><button class="page-btn active" onclick="location.href='settings.html'" style="position:relative;display:flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(0,140,220,.7);border:1px solid #00d4ff;border-radius:6px;color:#fff;font-size:13px;cursor:pointer"><span class="nav-icon">⚙️</span>系统设置</button></div>
+<div class="page-nav" style="display:flex;align-items:center;gap:6px;padding:0 20px;background:linear-gradient(135deg,#0a1428,#0d1f44);border-bottom:3px solid #00d4ff;position:sticky;top:0;z-index:1000;height:58px"><button class="page-btn" onclick="location.href='index.html'" style="position:relative;display:flex;align-items:center;gap:8px;padding:6px 12px;background:linear-gradient(180deg,rgba(0,100,180,.6),rgba(0,50,120,.7));border:1px solid rgba(0,180,255,.25);border-radius:6px;color:#fff;font-size:12px;cursor:pointer"><span class="nav-icon">🏠</span>首页</button><button class="page-btn" onclick="location.href='data.html'" style="position:relative;display:flex;align-items:center;gap:8px;padding:6px 12px;background:linear-gradient(180deg,rgba(0,100,180,.6),rgba(0,50,120,.7));border:1px solid rgba(0,180,255,.25);border-radius:6px;color:#fff;font-size:12px;cursor:pointer"><span class="nav-icon">📋</span>综合数据</button><button class="page-btn" onclick="location.href='trends.html'" style="position:relative;display:flex;align-items:center;gap:8px;padding:6px 12px;background:linear-gradient(180deg,rgba(0,100,180,.6),rgba(0,50,120,.7));border:1px solid rgba(0,180,255,.25);border-radius:6px;color:#fff;font-size:12px;cursor:pointer"><span class="nav-icon">📊</span>趋势监测</button><button class="page-btn" onclick="location.href='history.html'" style="position:relative;display:flex;align-items:center;gap:8px;padding:6px 12px;background:linear-gradient(180deg,rgba(0,100,180,.6),rgba(0,50,120,.7));border:1px solid rgba(0,180,255,.25);border-radius:6px;color:#fff;font-size:12px;cursor:pointer"><span class="nav-icon">📜</span>历史数据</button><button class="page-btn" onclick="location.href='sensors.html'" style="position:relative;display:flex;align-items:center;gap:8px;padding:6px 12px;background:linear-gradient(180deg,rgba(0,100,180,.6),rgba(0,50,120,.7));border:1px solid rgba(0,180,255,.25);border-radius:6px;color:#fff;font-size:12px;cursor:pointer"><span class="nav-icon">📡</span>传感器运维</button><button class="page-btn active" onclick="location.href='settings.html'" style="position:relative;display:flex;align-items:center;gap:8px;padding:6px 12px;background:rgba(0,140,220,.7);border:1px solid #00d4ff;border-radius:6px;color:#fff;font-size:12px;cursor:pointer"><span class="nav-icon">⚙️</span>系统设置</button></div>
 
     <div class="particles"
     <div class="particles" id="particles"></div>
