@@ -1415,23 +1415,6 @@
             
         </div>
     </div>
-    <div class="stats-bar">
-        <div class="stat-card" onclick="openModal('sensors')"><div class="label">在线传感器</div><div class="value" id="sensorCount">48</div><div class="unit">个</div><div class="trend trend-stable">→ 正常</div></div>
-        <div class="stat-card"><div class="label">监测储罐</div><div class="value">12</div><div class="unit">座</div></div>
-        <div class="stat-card" onclick="openModal('strain')"><div class="label">平均应变</div><div class="value" id="avgStrain">34.8</div><div class="unit">με</div><div class="trend trend-down" id="strainTrend">↓ 1.2%</div></div>
-        <div class="stat-card" onclick="openModal('displacement')"><div class="label">最大位移</div><div class="value" id="maxDisplacement">54.7</div><div class="unit">mm</div><div class="trend trend-stable" id="dispTrend">→ 稳定</div></div>
-        <div class="stat-card" onclick="openModal('settlement')"><div class="label">沉降速率</div><div class="value" id="settlementRate">0.15</div><div class="unit">mm/d</div><div class="trend trend-down">↓ 正常</div></div>
-        <div class="stat-card" onclick="openModal('tilt')"><div class="label">倾角变化</div><div class="value" id="tiltAngle">54.82</div><div class="unit">°</div><div class="trend trend-stable">→ 正常</div></div>
-        <div class="stat-card" onclick="openModal('temperature')"><div class="label">平均温度</div><div class="value" id="avgTemp">25.1</div><div class="unit">°C</div><div class="trend trend-up" id="tempTrend">↑ 0.3</div></div>
-        <div class="stat-card" onclick="openModal('alerts')"><div class="label">告警数量</div><div class="value" id="alertCount">0</div><div class="unit">危险</div><div style="color:#ffaa00;font-size:9px">1预警</div></div>
-    </div>
-    <div class="main-content" style="display:flex;flex-direction:column;gap:15px;padding:15px 25px">
-        <div class="chart-container full-width" style="min-height:280px"><div class="chart-title">🎲 传感器健康状态散点分布</div><div class="chart-box" id="sensorScatter" style="height:240px;min-height:240px"></div></div>
-        <div class="chart-container full-width"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><div class="chart-title">📡 实时传感器数据 <span style="font-size:10px;color:rgba(0,212,255,0.5)">(当前储罐49点)</span></div><div><span id="currentTankName" style="color:#00d4ff;font-weight:bold;margin-right:10px">1号储罐</span><button onclick="currentTank=(currentTank-1+12)%12; console.log('切换到罐:'+currentTank); document.getElementById('sensorGrid').innerHTML=''; for(var i=currentTank*49;i<currentTank*49+49;i++){sensorData[i]={id:'S'+(i+1),type:['应变','位移','倾角','温度'][i%4],value:10+Math.random()*40,status: sensorData[i]?sensorData[i].history:[],history:sensorData[i]?sensorData[i].history:[]};sensorData[i].status=sensorData[i].value>55?'danger':sensorData[i].value>45?'warning':'normal';} updateSensorGrid(); renderTank(currentTank);", style="background:rgba(0,40,80,0.8);border:1px solid rgba(0,212,255,0.4);color:#00d4ff;cursor:pointer;border-radius:3px;font-size:11px;padding:2px 8px">◀</button> <button onclick="currentTank=(currentTank+1)%12; console.log('切换到罐:'+currentTank); document.getElementById('sensorGrid').innerHTML=''; for(var i=currentTank*49;i<currentTank*49+49;i++){sensorData[i]={id:'S'+(i+1),type:['应变','位移','倾角','温度'][i%4],value:10+Math.random()*40,status: sensorData[i]?sensorData[i].history:[],history:sensorData[i]?sensorData[i].history:[]};sensorData[i].status=sensorData[i].value>55?'danger':sensorData[i].value>45?'warning':'normal';} updateSensorGrid(); renderTank(currentTank);", style="background:rgba(0,40,80,0.8);border:1px solid rgba(0,212,255,0.4);color:#00d4ff;cursor:pointer;border-radius:3px;font-size:11px;padding:2px 8px">▶</button></div></div><div class="sensor-grid" id="sensorGrid" style="width:100%;box-sizing:border-box"></div></div>
-    </div>
-
-    <div class="modal" id="modal"><div class="modal-content"><div class="modal-header" id="modalHeader"><h2 id="modalTitle"></h2></div><div class="modal-body" id="modalBody"></div></div></div>
-    <script>
         let sensorData=[],strainHistory=[],displacementHistory=[],chartInstances={},countdown=10,currentTank=0;
                 var tankNames = ["1号储罐","2号储罐","3号储罐","4号储罐","5号储罐","6号储罐","7号储罐","8号储罐","9号储罐","10号储罐","11号储罐","12号储罐"];
         function createParticles(){const c=document.getElementById('particles');for(let i=0;i<50;i++){const p=document.createElement('div');p.className='particle';p.style.left=Math.random()*100+'%';p.style.animationDelay=Math.random()*15+'s';p.style.animationDuration=(10+Math.random()*10)+'s';c.appendChild(p)}}
